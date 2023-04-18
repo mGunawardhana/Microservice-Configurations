@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: item-service
+#data source
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ItemManage?createDatabaseIfNotExist=true
+    password: sanu1234
+    username: root
+#jpa
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+
+#config-server client
+#  config:
+#    import: optional:configserver:http://localhost:8085/
+
+server:
+  port: 8082
+
+info:
+  app:
+    name: ${spring.application.name}
+
+#for eureka client
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+    healthcheck:
+      enabled: true
+
+#for the actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
